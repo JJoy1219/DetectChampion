@@ -65,9 +65,7 @@ def create_minimap():
         minimap = cv2.resize(minimap, dsize=(256, 256), interpolation=cv2.INTER_LINEAR)
         im = Image.fromarray(minimap)
         return im
-        #im.save('trialimage1.png')
-
-        break
+        
 
     
                 

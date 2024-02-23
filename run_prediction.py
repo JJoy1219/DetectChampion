@@ -2,9 +2,10 @@ from ultralytics import YOLO
 from PIL import Image
 from create_minimap import create_minimap
 
-def predict_position(minimap_image):
+def predict_position():
   model = YOLO("models/balanced-approach/weights/best.pt")
   #buf = Image.open("minimapexample.png")
+  minimap_image = create_minimap()
   results = model.predict(minimap_image)
   result = results[0]
   output = []
@@ -19,5 +20,7 @@ def predict_position(minimap_image):
     output.append([
       round(x), round(y), result.names[class_id], prob
     ])
-  return output
   [print(f"{name}: ({x},{y}) - {prob} chance") for x, y, name, prob in output]
+  return output
+  
+predict_position()
