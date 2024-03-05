@@ -1,6 +1,7 @@
 from ultralytics import YOLO
 from PIL import Image
 from create_minimap import create_minimap
+import time
 
 def predict_position():
   model = YOLO("models/balanced-approach/weights/best.pt")
@@ -22,5 +23,6 @@ def predict_position():
     ])
   [print(f"{name}: ({x},{y}) - {prob} chance") for x, y, name, prob in output]
   return output
-  
+
+time.sleep(10)
 predict_position()
