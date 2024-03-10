@@ -2,11 +2,13 @@ from ultralytics import YOLO
 from PIL import Image
 from create_minimap import create_minimap
 import time
+import os
+from configparser import ConfigParser
 
-def predict_position():
+def predict_position(minimap_scale = 0.0):
   model = YOLO("models/balanced-approach/weights/best.pt")
   #buf = Image.open("minimapexample.png")
-  minimap_image = create_minimap()
+  minimap_image = create_minimap(float(minimap_scale)) 
   results = model.predict(minimap_image)
   result = results[0]
   output = []
@@ -24,5 +26,16 @@ def predict_position():
   [print(f"{name}: ({x},{y}) - {prob} chance") for x, y, name, prob in output]
   return output
 
-time.sleep(10)
-predict_position()
+#time.sleep(5)
+#predict_position()
+
+def find(name, path):
+  for root, dirs, files in os.walk(path):
+    if name in files:
+      return os.path.join(root, name)
+    
+
+config = ConfigParser()
+config.read((find("game.cfg", "C:\\")))
+minimap_scale = config.get('HUD', 'MinimapScale')
+predict_position(minimap_scale)

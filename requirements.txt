@@ -1,0 +1,5 @@
+ultralytics
+Pillow
+opencv-python
+mss
+numpy
