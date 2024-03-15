@@ -7,7 +7,7 @@ from configparser import ConfigParser
 
 def predict_position(minimap_scale = 0.0):
   model = YOLO("models/balanced-approach/weights/best.pt")
-  #buf = Image.open("minimapexample.png")
+  
   minimap_image = create_minimap(float(minimap_scale)) 
   results = model.predict(minimap_image)
   result = results[0]
@@ -26,8 +26,7 @@ def predict_position(minimap_scale = 0.0):
   [print(f"{name}: ({x},{y}) - {prob} chance") for x, y, name, prob in output]
   return output
 
-#time.sleep(5)
-#predict_position()
+
 
 def find(name, path):
   for root, dirs, files in os.walk(path):
